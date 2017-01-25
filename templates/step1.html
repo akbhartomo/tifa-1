@@ -1,0 +1,11 @@
+<ion-view view-title="Data Pribadi">
+	<ion-content on-swipe-left="goForward()">
+		<div class="list">
+			<ion-item 
+			ng-repeat="item in group1"
+			class="item-accordion list {{item.hidden=='true'? 'ng-hide' : ''}}">
+			<div ng-include src="'templates/formModel.html'"></div>
+			</ion-item>
+		</div>
+	</ion-content>
+</ion-view>

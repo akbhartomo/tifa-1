@@ -1,0 +1,107 @@
+/* Empty. Add your own CSS if you like */
+body {
+  cursor: url('http://ionicframework.com/img/finger.png'), auto;
+  font-family : "Comfortaa";
+}
+
+/*
+ * http://docs.angularjs.org/api/ng/directive/ngShow#usage_animations
+ */
+.list .item.item-accordion {
+  line-height: 38px;
+  padding: 0;
+  margin: 0;
+  transition: 0.09s all linear;
+}
+.list .item.item-accordion.ng-hide {
+  line-height: 0px;
+}
+.list .item.item-accordion.ng-hide-add,
+.list .item.item-accordion.ng-hide-remove {
+  display: block;
+}
+.list{
+  padding:0;
+  margin:0;
+}
+.item-input{
+  display: block;
+}
+.input-label {
+  max-width: 100%;
+  width: 100%;
+}
+.item-select select {
+  position: relative;
+  direction: ltr;
+  width: 100%;
+  max-width: 85%;
+  padding: 6px 3px;
+}
+.item-select:after {
+  top: 60%;
+}
+
+/* Mentimun Style */
+.bar.bar-stable {
+  background-color: #00c853;
+}
+.button-balanced {
+  background-color: #00c853 !important;
+  border-radius: 0;
+  margin: 0;
+}
+.bar.bar-stable .title {
+  color: #FFF; 
+}
+
+.scroll-bar-indicator
+{
+	display: none;
+}
+
+/* hide tabs  */
+.has-tabs {
+  bottom: 0;
+}
+
+.has-tabs-top {
+  top: 44px;
+}
+
+.bar.bar-stable{
+  top: 0px !important;  
+}
+
+.tab-nav{
+  display:none;
+}
+
+.validation-info {
+  font-size: 0.75em;
+  float: right;
+  margin-right: 20px;
+  color: crimson;
+}
+
+html input[disabled] {
+  width: 95%;
+  display: block;
+  direction: rtl;
+}
+
+input[type="number"][disabled], [name="totalProductPrice"], [name="installmentAdminFee"], [name="totalLoan"] {
+  /* direction: rtl; */
+}
+
+.bar-stable .button.button-clear {
+  color: #fff !important;
+}
+
+#ketentuan {
+  overflow: scroll;
+}
+
+#ketentuan li{
+  display:list-item;
+}

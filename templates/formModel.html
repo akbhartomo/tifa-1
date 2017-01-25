@@ -1,0 +1,326 @@
+            <span ng-if="item.type=='date'">
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">{{item.label}}</span>
+                  <input limit-to=""
+                  name="{{item.name}}"
+                  type="date"
+                  placeholder="1900-01-01"
+                  value="1900-01-01"
+                  ">              
+              </label>
+              <!-- type date -->
+            </span>
+            <span ng-if="item.type=='text' || item.type=='email' || item.type=='number'">
+              <span ng-if="item.hidden!='true'">
+                <span ng-if="item.disabled=='true'">
+                  <label class="item item-input item-stacked-label">
+                    <span class="input-label">{{item.label}}</span>
+                    <input ng-disabled="true"
+                    id="{{item.id}}" 
+                    name="{{item.name}}"
+                    type="{{item.type}}" 
+                    placeholder="{{item.placeholder}}"
+                    value="{{item.default}}"
+                    maxlength="{{item.maxlength}}"
+                    >
+                  </label>
+                </span>
+                <span ng-if="item.disabled!='true'">
+                  <span ng-if="item.optional=='true'">
+                    <label class="item item-input item-stacked-label">
+                      <span class="input-label">{{item.label}}</span>
+                      <input limit-to="{{item.maxDigit}}"
+                      id="{{item.id}}" 
+                      name="{{item.name}}"
+                      type="{{item.type}}" 
+                      placeholder="{{item.placeholder}}"
+                      value="{{item.default}}"
+                      maxlength="{{item.maxlength}}"
+                      >
+                    </label>
+                  </span>
+                  <span ng-if="item.optional!='true'">
+                    <label class="item item-input item-stacked-label">
+                      <span class="input-label">{{item.label}}</span>
+                      <input limit-to="{{item.maxDigit}}"
+                      id="{{item.id}}" 
+                      name="{{item.name}}"
+                      type="{{item.type}}" 
+                      placeholder="{{item.placeholder}}"
+                      value="{{item.default}}"
+                      maxlength="{{item.maxlength}}"
+                      ng-focus="validate(item)"
+                      ng-blur="validate(item)"
+                      >
+                    </label>
+                  </span>                  
+                </span>
+              </span>
+            </span>
+            <!-- type text / email / number -->
+            <span ng-if="item.type=='select'">
+              <div class="list">
+                <label class="item item-input item-select">
+                  <div class="input-label">
+                    {{item.label}}
+                  </div>
+                  <select
+                  name="{{item.name}}" 
+                  ng-model="select" 
+                  ng-change="validateOtherItem(item, item.nonNullItemName, item.whenValue)">
+                    <option 
+                      ng-repeat="option in item.options"
+                      value="{{option.value}}"
+                    >{{option.label}}</option>
+                  </select>
+                </label>
+              </div>
+            </span>
+
+            <!-- type select -->
+            <span ng-if="item.type=='selectUpdate'">
+              <div class="list">
+                <label class="item item-input item-select">
+                  <div class="input-label">
+                    {{item.label}}
+                  </div>
+                  <select
+                  name="{{item.name}}" 
+                  ng-model="select" 
+                  ng-change="selectUpdate(item.name)">
+                    <option 
+                      ng-repeat="option in item.options"
+                      value="{{option.value}}"
+                    >{{option.label}}</option>
+                  </select>
+                </label>
+              </div>
+            </span>
+            <!-- type selectUpdate -->
+            <span ng-if="item.type=='button'">
+                <button class="button button-block" style="background-color:#00b0ff; color:white;" ng-click="goForward()">
+                  {{item.label}}
+                </button>
+            </span>
+            <!-- type button -->
+            <span ng-if="item.type=='lookup'">
+              <span ng-if="item.name=='domisiliProvinsi'">
+                <label class="item item-input item-select">
+                  <div class="input-label">
+                    {{item.label}}
+                  </div>
+                  <select 
+                  id="selectedProvince" 
+                  ng-model="selectedProvince" 
+                  ng-change="updateCity()"
+                  ng-options="option.name for option in data.province track by option.id"
+                  name="{{item.name}}">
+                  </select>
+                </label>
+              </span>
+              <span ng-if="item.name=='domisiliKota'">
+                <label class="item item-input item-select">
+                  <div class="input-label">
+                    {{item.label}}
+                  </div>
+                  <select 
+                  id="selectedCity" 
+                  ng-model="selectedCity" 
+                  ng-change="updateDistrict()"
+                  ng-options="option.name for option in data.city track by option.id"
+                  name="{{item.name}}">
+                  </select>
+                </label>
+              </span>
+              <span ng-if="item.name=='domisiliKecamatan'">
+                <label class="item item-input item-select">
+                  <div class="input-label">
+                    {{item.label}}
+                  </div>
+                  <select 
+                  id="selectedDistrict" 
+                  ng-model="selectedDistrict" 
+                  ng-change="updateSubdistrict()"
+                  ng-options="option.name for option in data.district track by option.id"
+                  name="{{item.name}}">
+                  </select>
+                </label>
+              </span>
+              <span ng-if="item.name=='domisiliKelurahan'">
+                <label class="item item-input item-select">
+                  <div class="input-label">
+                    {{item.label}}
+                  </div>
+                  <select 
+                  id="selectedSubdistrict" 
+                  ng-model="selectedSubdistrict" 
+                  ng-change="updateZipcode()"
+                  ng-options="option.name for option in data.subdistrict track by option.id"
+                  name="{{item.name}}">
+                  </select>
+                </label>
+              </span>
+              <span ng-if="item.name=='domisiliZipCode'">
+                <label class="item item-input item-select">
+                  <div class="input-label">
+                    {{item.label}}
+                  </div>
+                  <select 
+                  id="selectedZipcode" 
+                  ng-model="selectedZipcode" 
+                  ng-options="option.name for option in data.zipcode track by option.id"
+                  name="{{item.name}}">
+                  </select>
+                </label>
+              </span>
+              <span ng-if="item.name=='companyProvince'">
+                <label class="item item-input item-select">
+                  <div class="input-label">
+                    {{item.label}}
+                  </div>
+                  <select 
+                  id="selectedCompanyProvince" 
+                  ng-model="selectedCompanyProvince" 
+                  ng-change="updateCity()"
+                  ng-options="option.name for option in data.province track by option.id"
+                  name="{{item.name}}">
+                  </select>
+                </label>
+              </span>
+              <span ng-if="item.name=='companyCity'">
+                <label class="item item-input item-select">
+                  <div class="input-label">
+                    {{item.label}}
+                  </div>
+                  <select 
+                  id="selectedCompanyCity" 
+                  ng-model="selectedCompanyCity" 
+                  ng-change="updateDistrict()"
+                  ng-options="option.name for option in data.city track by option.id"
+                  name="{{item.name}}">
+                  </select>
+                </label>
+              </span>
+              <span ng-if="item.name=='companyDistrict'">
+                <label class="item item-input item-select">
+                  <div class="input-label">
+                    {{item.label}}
+                  </div>
+                  <select 
+                  id="selectedCompanyDistrict" 
+                  ng-model="selectedCompanyDistrict" 
+                  ng-change="updateSubdistrict()"
+                  ng-options="option.name for option in data.district track by option.id"
+                  name="{{item.name}}">
+                  </select>
+                </label>
+              </span>
+              <span ng-if="item.name=='companySubdistrict'">
+                <label class="item item-input item-select">
+                  <div class="input-label">
+                    {{item.label}}
+                  </div>
+                  <select 
+                  id="selectedCompanySubdistrict" 
+                  ng-model="selectedCompanySubdistrict" 
+                  ng-change="updateZipcode()"
+                  ng-options="option.name for option in data.subdistrict track by option.id"
+                  name="{{item.name}}">
+                  </select>
+                </label>
+              </span>
+              <span ng-if="item.name=='companyZipcode'">
+                <label class="item item-input item-select">
+                  <div class="input-label">
+                    {{item.label}}
+                  </div>
+                  <select 
+                  id="selectedCompanyZipcode" 
+                  ng-model="selectedCompanyZipcode" 
+                  ng-change="validateZipcode()"
+                  ng-options="option.name for option in data.zipcode track by option.id"
+                  name="{{item.name}}">
+                  </select>
+                </label>
+              </span>
+            </span>
+            <!-- type lookup -->
+            <span ng-if="item.type=='inquirenumber'">
+              <span ng-if="item.name=='totalLoan'">
+                <label class="item item-input item-stacked-label">
+                  <span class="input-label">{{item.label}}</span>
+                  <br/>
+                  <input limit-to="{{item.maxDigit}}"
+                  id="{{item.id}}" 
+                  name="{{item.name}}"
+                  type="text" 
+                  maxlength="{{item.maxlength}}"
+                  ng-keyup="commaSeparate()"
+                  ng-blur="calcPriceTifa()"
+                  >
+                </label>
+              </span>
+              <span ng-if="item.name=='totalProductPrice'">
+                <label class="item item-input item-stacked-label">
+                  <span class="input-label">{{item.label}}</span>
+                  <br/>
+                  <input limit-to="{{item.maxDigit}}"
+                  id="{{item.id}}" 
+                  name="{{item.name}}"
+                  type="text" 
+                  maxlength="{{item.maxlength}}"
+                  ng-keyup="commaSeparate()"
+                  >
+                </label>
+              </span>
+              <span ng-if="item.name=='incomePerYear'">
+                <label class="item item-input item-stacked-label">
+                  <span class="input-label">{{item.label}}</span>
+                  <br/>
+                  <input limit-to="{{item.maxDigit}}"
+                  id="{{item.id}}" 
+                  name="{{item.name}}"
+                  type="text" 
+                  maxlength="{{item.maxlength}}"
+                  >
+                </label>
+              </span>
+            </span> 
+            <!-- type inquirenumber -->
+            <span ng-if="item.type=='inquireselect'">
+              <div class="list">
+                <label class="item item-input item-select">
+                  <div class="input-label">
+                    {{item.label}}
+                  </div>
+                  <select 
+                  name="{{item.name}}"
+                  ng-model="selectTifa"
+                  ng-change="calcPriceTifa()"
+                  >
+                    <option 
+                      ng-repeat="option in item.options"
+                      ng-value="{{option.value}}"
+                      value="{{option.value}}"
+                    >{{option.label}}</option>
+                  </select>
+                </label>
+              </div>
+            </span>
+            <!-- type inquireselect -->
+            
+            
+            <!-- <span ng-if="item.type=='inputNPWP'">
+              <span ng-if="item.name='typeNumberNPWP'">
+                <label class="item item-input item-stacked-label">
+                  <span class="input-label">{{item.label}}</span>
+                  <br/>
+                  <input limit-to="{{item.maxDigit}}"
+                    id="{{item.id}}" 
+                    name="{{item.name}}"
+                    type="number"
+                    ng-keyup="dotSeparator()"                    
+                    ng-blur="inputNPWP()">
+                </label>
+              </span>
+            </span> -->

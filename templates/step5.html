@@ -1,0 +1,16 @@
+<ion-view view-title="No Rekening Penyedia Barang/Jasa">
+  <ion-content on-swipe-right="goBack()" on-swipe-left="goForward()">
+      <div class="list">
+          <ion-item 
+            ng-repeat="item in group5"
+            class="item-accordion list {{item.hidden=='true'? 'ng-hide' : ''}}">
+            <div ng-include src="'templates/formModel.html'"></div>
+          </ion-item>
+      </div>
+      <input id="ketentuan" type="checkbox" name="ketentuan" value="{{ketentuan}}" style="margin:10px;"><label for="ketentuan">Dengan ini saya setuju dengan </label><a href="{{ketentuanUrl}}">Syarat dan Ketentuan</a></input>
+      <br/>
+      <button class="button button-block" style="background-color:#00b0ff; color:white;" ng-click="goForward()">
+        Submit
+      </button>
+  </ion-content>
+</ion-view>

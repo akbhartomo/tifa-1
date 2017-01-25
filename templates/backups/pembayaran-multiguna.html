@@ -1,0 +1,11 @@
+<ion-view view-title="Pembayaran Multiguna">
+  <ion-content>
+      <div class="list">
+          <ion-item 
+            ng-repeat="item in group3"
+            class="item-accordion list {{item.hidden=='true'? 'ng-hide' : ''}}">
+            <div ng-include src="'templates/formModel.html'"></div>
+          </ion-item>
+      </div>
+  </ion-content>
+</ion-view>
